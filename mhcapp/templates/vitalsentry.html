@@ -1,0 +1,129 @@
+{% extends 'nurseleftsection.html' %}
+{% block pagecontent %}
+    <div class="main-container" style="display: flex; flex-wrap: wrap; gap: 20px; padding: 20px; justify-content: space-between;">
+
+        <div class="left-section" style="flex: 1; min-width: 300px;">
+            <!-- Patient Vitals Section -->
+            <div class="patient-vitals" style="padding: 20px; background: #f9f9f9; border-radius: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); margin-bottom: 20px;">
+                <h3 class="section-title" style="border-bottom: 2px solid #4f1915; padding-bottom: 10px;">Patient Vitals</h3>
+                <ul class="vitals-list" style="list-style-type: none; padding: 0;">
+                    <li><strong>Blood Pressure:</strong> <input type="text" id="bp" value="120/80 mmHg"></li>
+                    <li><strong>SpO2:</strong> <input type="text" id="spo2" value="98% O2 Sat"></li>
+                    <li><strong>Heart Rate:</strong> <input type="text" id="hr" value="75 BPM"></li>
+                    <li><strong>Respiratory Rate:</strong> <input type="text" id="rr" value="16 br/min"></li>
+                </ul>
+                <div style="display: flex; gap: 10px;">
+                    <button type="button" onclick="clearVitals()">Clear</button>
+                    <button type="button" onclick="addVitals()">Add</button>
+                </div>
+            </div>
+
+            <!-- Patient Details Section -->
+            <div class="patient-details" style="padding: 20px; background: #f9f9f9; border-radius: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+                <h3 class="section-title" style="border-bottom: 2px solid #4f1915; padding-bottom: 10px;">Patient Details</h3>
+                <ul class="details-list" style="list-style-type: none; padding: 0;">
+                    <li><strong>Physical Exam:</strong>
+                        <ul>
+                            <li><input type="text" id="general" value="Well nourished, well developed"></li>
+                            <li><input type="text" id="cvs" value="S1S2 heard, no murmurs"></li>
+                            <li><input type="text" id="rs" value="Clear breath sounds"></li>
+                            <li><input type="text" id="abdomen" value="Soft, non-tender"></li>
+                        </ul>
+                    </li>
+                    <li><strong>Diagnosis:</strong>
+                        <ul>
+                            <li><input type="text" id="diagnosis1" value="Acute Bronchitis"></li>
+                            <li><input type="text" id="diagnosis2" value="Acute Sinusitis"></li>
+                        </ul>
+                    </li>
+                    <li><strong>Ongoing Medications:</strong>
+                        <ul>
+                            <li><input type="text" id="medication1" value="Tab. Paracetamol PO TDS for 3 days"></li>
+                            <li><input type="text" id="medication2" value="Cap. Amoxicillin PO BD for 5 days"></li>
+                            <li><input type="text" id="medication3" value="Syr. Cough Expectorant 10ml TDS"></li>
+                        </ul>
+                    </li>
+                    <li><strong>Previous Diagnoses:</strong>
+                        <ul>
+                            <li><input type="text" id="prevDiagnosis1" value="Type II Diabetes with Ulcer"></li>
+                            <li><input type="text" id="prevDiagnosis2" value="Hypertension"></li>
+                            <li><input type="text" id="prevDiagnosis3" value="Asthma"></li>
+                        </ul>
+                    </li>
+                    <li><strong>Chief Complaint:</strong> <input type="text" id="complaint" value="Cough with sputum"></li>
+                    <li><strong>Duration:</strong> <input type="text" id="duration" value="3 days"></li>
+                    <li><strong>Severity:</strong> <input type="text" id="severity" value="Moderate"></li>
+                </ul>
+                <div style="display: flex; gap: 10px;">
+                    <button type="button" onclick="clearDetails()">Clear</button>
+                    <button type="button" onclick="addDetails()">Add</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Patient Profile Section -->
+        <div class="right-section" style="flex: 0.4; min-width: 300px; background-color: #96dbe4; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); align-self: flex-start;">
+            <div class="profile-card">
+                <div class="card-header bg-dark text-white" style="text-align: center; padding: 10px; border-radius: 5px;">
+                    <h6>Patient Profile</h6>
+                </div>
+                <div class="profile-header" style="display:flex; flex-direction:column; justify-content: center; align-items: center; padding: 20px;">
+                    <img src="/static/resource/abid.jpg" alt="Profile Picture" class="profile-pic" style="width: 100px; height: 100px; border-radius: 50%;">
+                    <div>
+                        <h6 class="mb-0">John Doe</h6>
+                        <p class="mb-0">Patient ID: 12345</p>
+                    </div>
+                </div>
+                <h6 class="text-muted" style="border-bottom: 1px solid #4f1915; padding-bottom: 5px;">Details</h6>
+                <ul class="list-unstyled">
+                    <li>Age: 45</li>
+                    <li>Gender: Male</li>
+                    <li>Height: 5'8"</li>
+                    <li>Weight: 70kg</li>
+                </ul>
+                <h6 class="text-muted mt-3" style="border-bottom: 1px solid #4f1915; padding-bottom: 5px;">Allergies</h6>
+                <ul class="list-unstyled">
+                    <li>Penicillin</li>
+                    <li>Peanuts</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function clearVitals() {
+            document.getElementById('bp').value = '';
+            document.getElementById('spo2').value = '';
+            document.getElementById('hr').value = '';
+            document.getElementById('rr').value = '';
+        }
+
+        function addVitals() {
+            alert("Vitals Added!");
+            // You can add the functionality to save or send the data here.
+        }
+
+        function clearDetails() {
+            document.getElementById('general').value = '';
+            document.getElementById('cvs').value = '';
+            document.getElementById('rs').value = '';
+            document.getElementById('abdomen').value = '';
+            document.getElementById('diagnosis1').value = '';
+            document.getElementById('diagnosis2').value = '';
+            document.getElementById('medication1').value = '';
+            document.getElementById('medication2').value = '';
+            document.getElementById('medication3').value = '';
+            document.getElementById('prevDiagnosis1').value = '';
+            document.getElementById('prevDiagnosis2').value = '';
+            document.getElementById('prevDiagnosis3').value = '';
+            document.getElementById('complaint').value = '';
+            document.getElementById('duration').value = '';
+            document.getElementById('severity').value = '';
+        }
+
+        function addDetails() {
+            alert("Details Added!");
+            // You can add the functionality to save or send the data here.
+        }
+    </script>
+{% endblock %}

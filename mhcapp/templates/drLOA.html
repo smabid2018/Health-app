@@ -1,0 +1,169 @@
+{% extends 'drbase.html' %}
+{% block pagecontent %}
+                    <!-- All content -->
+                    <div class="row">
+                    <!-- Appointment content -->
+                    <div class="col-10 bg-gradient-light">
+                        <!-- First row content -->
+                        <div class="row justify-content-around">
+                            <!-- Vitals -->
+                            <div class="col-2 vitals justify-content-center">
+                                  <!-- Blood Pressure -->
+                                  <div class="vital-card">
+                                    <div class="card-header">
+                                      <svg class="icon icon-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m7 15 5-5 5 5"></path>
+                                        <path d="m7 9 5-5 5 5"></path>
+                                      </svg>
+                                      <h3 class="card-title">BP</h3>
+                                    </div>
+                                    <div class="card-content">
+                                      <div class="measurement">120/80</div>
+                                      <div class="unit">mmHg</div>
+                                    </div>
+                                  </div>
+                                  <!-- SpO2 -->
+                                  <div class="vital-card">
+                                    <div class="card-header">
+                                      <svg class="icon icon-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                                      </svg>
+                                      <h3 class="card-title">SpO2</h3>
+                                    </div>
+                                    <div class="card-content">
+                                      <div class="measurement">98%</div>
+                                      <div class="unit">O2 Sat</div>
+                                    </div>
+                                  </div>
+                                    <!-- Heart Rate -->
+                                  <div class="vital-card">
+                                    <div class="card-header">
+                                      <svg class="icon icon-red" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+                                      </svg>
+                                      <h3 class="card-title">HR</h3>
+                                    </div>
+                                    <div class="card-content">
+                                      <div class="measurement">75</div>
+                                      <div class="unit">BPM</div>
+                                    </div>
+                                  </div>
+                                  <!-- Respiratory Rate -->
+                                  <div class="vital-card">
+                                    <div class="card-header">
+                                      <svg class="icon icon-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"></path>
+                                      </svg>
+                                      <h3 class="card-title">RR</h3>
+                                    </div>
+                                    <div class="card-content">
+                                      <div class="measurement">16</div>
+                                      <div class="unit">br/min</div>
+                                    </div>
+                                  </div>
+                                </div>
+                            <!-- Ongoing Medication -->
+                            <div class="col-5 medication">
+                              <h3 class="section-title" style="border-bottom: 1px solid #4f1915;">Ongoing Medications</h3>
+                              <ul class="medication-list">
+                                <li>Tab. Paracetamol PO TDS for 3 days</li>
+                                <li>Cap. Amoxicillin PO BD for 5 days</li>
+                                <li>Syr. Cough Expectorant 10ml TDS</li>
+                              </ul>
+                            </div>
+                            <!-- Previous Diagnosis -->
+                            <div class="col-4 diagnosis">
+                              <h3 class="section-title" style="border-bottom: 1px solid #4f1915;">Previous Diagnoses</h3>
+
+                              <ul class="diagnosis-list">
+                                <li>Type II Diabetes with Ulcer</li>
+                                <li>Hypertension</li>
+                                <li>Asthma</li>
+                              </ul>
+                            </div>
+                        </div>
+                        <br>
+                        <!-- Second row content -->
+                        <div class="row justify-content-around">
+                            <!-- Physical Examination -->
+                            <div class="col-2 physical-exam medication" STYLE="height: auto">
+                              <h3 class="section-title" style="border-bottom: 1px solid #4f1915;">Physical Exam</h3>
+                              <ul class="exam-list" style="list-style-type: none; padding: 0; margin: 0;" >
+                                <li>General: Well nourished, well developed</li>
+                                <li>CVS: S1S2 heard, no murmurs</li>
+                                <li>RS: Clear breath sounds</li>
+                                <li>Abdomen: Soft, non-tender</li>
+                              </ul>
+                            </div>
+                            <!-- Chief Complain -->
+                            <div class="col-5 chief-complain" style="width: 50%; padding-right: 5px;">
+                                <h3 class="section-title" style="border-bottom: 1px solid #4f1915;">Chief Complain</h3>
+                                <p>Chief Complain: Cough with sputum</p>
+                                <p>Duration: 3 days</p>
+                                <p>Severity: Moderate</p>
+                            </div>
+                            <!-- Investigation -->
+                            <div class="col-4 investigation" style="width: 50%; padding-left: 5px;">
+                                <h3 class="section-title" style="border-bottom: 1px solid #4f1915;">Investigation</h3>
+                                <div class="form-group">
+                                    <input type="text" id="searchBox" class="form-control" placeholder="Start typing to search..." onkeyup="searchInvestigations()">
+                                    <ul id="suggestionsList" class="list-group mt-2" style="display:none;"></ul>
+                                </div>
+                                <p>Chest X-ray: Normal</p>
+                                <p>CT Scan: Pending</p>
+                                <p>Blood Test: Pending</p>
+                            </div>
+                        </div>
+                        <br>
+                        <!-- Third row content -->
+                        <div class="row ml-0 justify-content-around" style="min-height: 21vh;">
+                            <!-- Diagonosis -->
+                            <div class="col-2 diagnosis">
+                                <h3 class="section-title" style="border-bottom: 1px solid #4f1915;">Diagnosis</h3>
+                                <ul class="diagnosis-list">
+                                    <li>Acute Bronchitis</li>
+                                    <li>Acute Sinusitis</li>
+                                    <li>Acute tonsilitis</li>
+                                </ul>
+                            </div>
+                            <!-- Treatment -->
+                            <div class="col-9 medication">
+                              <h3 class="section-title" style="border-bottom: 1px solid #4f1915;">Treatment Plan</h3>
+                              <ul class="medication-list">
+                                <li>Tab. Paracetamol PO TDS for 3 days</li>
+                                <li>Cap. Amoxicillin PO BD for 5 days</li>
+                                <li>Syr. Cough Expectorant 10ml TDS</li>
+                              </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Profile Card -->
+                    <div class="col-2 justify-content-center" style="padding: 0">
+                    <!-- Profile Card -->
+                        <div class="profile-card">
+                            <div class="card-header bg-dark text-white">
+                              <h6>Patient Profile</h6>
+                            </div>
+                          <div class="profile-header" style="display:flex; flex-direction:column;justify-content: center">
+                            <img src="/static/resource/abid.jpg" alt="Profile Picture" class="profile-pic">
+                            <div>
+                              <h6 class="mb-0">John Doe</h6>
+                              <p class="mb-0">Patient ID: 12345</p>
+                            </div>
+                          </div><br>
+                          <h6 class="text-muted" style="border-bottom: 1px solid #4f1915;">Details</h6>
+                          <ul class="list-unstyled">
+                            <li>Age: 45</li>
+                            <li>Gender: Male</li>
+                            <li>Height: 5'8"</li>
+                            <li>Weight: 70kg</li>
+                          </ul> <br><br><br>
+                          <h6 class="text-muted mt-3" style="border-bottom: 1px solid #4f1915;">Allergies</h6>
+                          <ul class="list-unstyled">
+                            <li>Penicillin</li>
+                            <li>Peanuts</li>
+                          </ul>
+                        </div>
+                    </div>
+                    </div>
+{%  endblock%}
