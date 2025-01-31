@@ -24,3 +24,12 @@ def vitalsentry(request):
 
 def patientsform(request):
     return render(request, "patientsform.html")
+
+def radiographerdash(request):
+    return render(request, "radiographerdash.html")
+
+def techdash(request):
+    return render(request, "techdash.html")
+
+def radnewreq(request):
+    return render(request, "radnewreq.html")
