@@ -33,3 +33,6 @@ def techdash(request):
 
 def radnewreq(request):
     return render(request, "radnewreq.html")
+
+def patientdash(request):
+    return render(request, "patientdash.html")
