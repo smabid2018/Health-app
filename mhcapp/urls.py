@@ -13,6 +13,8 @@ urlpatterns = [
     path("techdash", views.techdash, name="techdash"),
     path("radnewreq", views.radnewreq, name="radnewreq"),
     path("patientdash", views.patientdash, name="patientdash"),
+    path("login", views.login, name="login"),
+
 
 
 ]
