@@ -12,5 +12,7 @@ urlpatterns = [
     path("radiographerdash", views.radiographerdash, name="radiographerdash"),
     path("techdash", views.techdash, name="techdash"),
     path("radnewreq", views.radnewreq, name="radnewreq"),
+    path("patientdash", views.patientdash, name="patientdash"),
+
 
 ]
