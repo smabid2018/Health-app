@@ -1,0 +1,61 @@
+{% extends 'patientleftsection.html' %}
+{% block pagecontent %}
+    <div class="container-fluid py-4">
+        <h2 class="text-center mb-4">My Dashboard</h2>
+        <div class="row">
+            <!-- First Row: Appointments Table and Patient Profile -->
+            <div class="col-md-8">
+                <div class="card shadow-sm rounded p-4 mb-4">
+                    <h3 class="card-title border-bottom pb-2">My Appointments</h3>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Doctor</th>
+                                <th>Day</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>10:00 AM</td>
+                                <td>Dr. Smith</td>
+                                <td>Monday</td>
+                                <td>Feb 5, 2025</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm rounded p-4 mb-4">
+                    <h3 class="card-title border-bottom pb-2">Patient Profile</h3>
+                    <div class="text-center">
+                        <img src="/static/resource/abid.jpg" alt="Profile Picture" class="rounded-circle img-fluid mb-3" style="width: 100px; height: 100px;">
+                    </div>
+                    <ul class="list-unstyled">
+                        <li><strong>Name:</strong> John Doe</li>
+                        <li><strong>Patient ID:</strong> 12345</li>
+                        <li><strong>Age:</strong> 45</li>
+                        <li><strong>Gender:</strong> Male</li>
+                        <li><strong>Height:</strong> 5'8"</li>
+                        <li><strong>Weight:</strong> 70kg</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Second Row: Allergies aligned to the right -->
+        <div class="row justify-content-end">
+            <div class="col-md-4">
+                <div class="card shadow-sm rounded p-4">
+                    <h3 class="card-title border-bottom pb-2">Allergies</h3>
+                    <ul class="list-unstyled">
+                        <li>Penicillin</li>
+                        <li>Peanuts</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
