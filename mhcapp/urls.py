@@ -9,5 +9,8 @@ urlpatterns = [
     path("nursedash", views.nursedash, name="nursedash"),
     path("vitalsentry", views.vitalsentry, name="vitalsentry"),
     path("patientsform", views.patientsform, name="patientsform"),
+    path("radiographerdash", views.radiographerdash, name="radiographerdash"),
+    path("techdash", views.techdash, name="techdash"),
+    path("radnewreq", views.radnewreq, name="radnewreq"),
 
 ]
