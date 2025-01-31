@@ -39,3 +39,6 @@ def patientdash(request):
 
 def login(request):
     return render(request, "login.html")
+
+def techreqdetails(request):
+    return render(request, "techreqdetails.html")
