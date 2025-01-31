@@ -1,0 +1,72 @@
+{% extends 'technicianleftsection.html' %}
+
+{% block pagecontent %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-lg-start mb-4 justify-content-between">
+        <h1 class="h3 mb-0 text-gray-800">Request Details</h1>
+    </div>
+
+    <!-- Content Row -->
+    <div class="row">
+        <!-- Report Form -->
+        <div class="col-xl-12 col-lg-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h6 class="m-0 font-weight-bold text-primary">Provide the requested report details</h6>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label><strong>Request</strong></label>
+                                <div class="form-control bg-light">CBC</div>
+                            </div>
+                            <div class="col-md-4">
+                                <label><strong>Reports</strong></label>
+                                <input type="text" class="form-control report-input" placeholder="Enter CBC report details">
+                            </div>
+                            <div class="col-md-4">
+                                <label><strong>References</strong></label>
+                                <div class="form-control bg-light">ref1</div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <div class="form-control bg-light">CRP</div>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control report-input" placeholder="Enter CRP report details">
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-control bg-light">ref2</div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <div class="form-control bg-light">S.Creatinine</div>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control report-input" placeholder="Enter S.Creatinine report details">
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-control bg-light">ref3</div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-4">
+                            <button type="button" class="btn btn-secondary">Back</button>
+                            <button type="button" class="btn btn-warning">Clear</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
