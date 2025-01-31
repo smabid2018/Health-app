@@ -36,3 +36,6 @@ def radnewreq(request):
 
 def patientdash(request):
     return render(request, "patientdash.html")
+
+def login(request):
+    return render(request, "login.html")
