@@ -55,8 +55,7 @@ ROOT_URLCONF = "MyHealthCard.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR , 'mhcapp/templates']
-        ,
+        "DIRS": [BASE_DIR, 'mhcapp/templates'],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -80,7 +79,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "myhealthcard",
         "USER": "root",
-        "PASSWORD": "",
+        "PASSWORD": "2243",
         "HOST": "127.0.0.1",
         "PORT": "3306",
     }
@@ -131,3 +130,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 STATICFILES_DIRS = [
     BASE_DIR, "mhcapp/static"
 ]
+
+# Custom User Model
+AUTH_USER_MODEL = "mhcapp.CustomUser"

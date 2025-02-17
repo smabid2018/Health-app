@@ -1,126 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
     <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
 
     <style>
-        /* Custom Color Theme based on logo */
-        :root {
-            --primary-color: #4e73df;  /* Replace this with your logo's primary color */
-            --secondary-color: #1cc88a; /* Replace with secondary color */
-        }
+      /* Custom Color Theme based on logo */
+      :root {
+        --primary-color: #4e73df; /* Replace this with your logo's primary color */
+        --secondary-color: #1cc88a; /* Replace with secondary color */
+      }
 
-        /* Gradient Blue Background */
-        body {
-            background: linear-gradient(135deg, #4e73df, #1cc88a); /* Gradient blue */
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column; /* Stack logo and container vertically */
-        }
+      /* Gradient Blue Background */
+      body {
+        background: linear-gradient(
+          135deg,
+          #4e73df,
+          #1cc88a
+        ); /* Gradient blue */
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        {% comment %} justify-content: center; {% endcomment %}
+        {% comment %} align-items: center; {% endcomment %}
+        flex-direction: column; /* Stack logo and container vertically */
+      }
 
-        .card {
-            border: none;
-            border-radius: 200px; /* Rounded border for the container */
-            background-color: #ffffff;
-            width: 100%;
-            max-width: 450px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better contrast */
-            margin-top: 20px; /* Reduced space between logo and container */
-        }
+      .card {
+        border: none;
+        border-radius: 200px; /* Rounded border for the container */
+        background-color: #ffffff;
+        width: 100%;
+        max-width: 450px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better contrast */
+        margin-top: 20px; /* Reduced space between logo and container */
+      }
 
-        .card-body {
-            background-color: #ffffff;
-            padding: 2rem; /* Add padding inside the card */
-        }
+      .card-body {
+        background-color: #ffffff;
+        padding: 2rem; /* Add padding inside the card */
+      }
 
-        .btn-primary {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-        }
+      .btn-primary {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+      }
 
-        .btn-primary:hover {
-            background-color: var(--secondary-color);
-            border-color: var(--secondary-color);
-        }
+      .btn-primary:hover {
+        background-color: var(--secondary-color);
+        border-color: var(--secondary-color);
+      }
 
-        .logo-container {
-            text-align: center;
-            margin-bottom: -50px; /* Reduced space below the logo */
-            margin-top:-50px;
-        }
+      .logo-container {
+        text-align: center;
+        margin-bottom: -50px; /* Reduced space below the logo */
+        margin-top: -50px;
+      }
 
-        .logo-container img {
-            width: 200px; /* Increased size */
-        }
+      .logo-container img {
+        width: 380px; /* Increased size */
+      }
 
-        .form-control {
-            border-radius: 15px;
-        }
+      .form-control {
+        border-radius: 15px;
+      }
 
-        .form-check-label {
-            font-size: 14px;
-        }
+      .form-check-label {
+        font-size: 14px;
+      }
     </style>
-</head>
-<body>
-
-
-
-    <!-- Logo (Outside the Container) -->
-    <div class="logo-container">
-        <img src="/static/resource/logo.png" alt="Logo" />
-    </div>
-
+  </head>
+  <body>
     <!-- Login Container -->
-    <div class="container-fluid d-flex justify-content-center align-items-center" style="height: auto;">
-        <!-- Login Card -->
-        <div class="card shadow-lg">
-            <div class="card-body">
-                <!-- Form -->
-                <form>
-                    <!-- Username -->
-                    <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" class="form-control" id="username" placeholder="Enter Username" required>
-                    </div>
-
-                    <!-- Password -->
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="Enter Password" required>
-                    </div>
-
-                    <!-- Remember Me -->
-                    <div class="form-group form-check">
-                        <input type="checkbox" class="form-check-input" id="rememberMe">
-                        <label class="form-check-label" for="rememberMe">Remember Me</label>
-                    </div>
-
-                    <!-- Login Button -->
-                    <button type="submit" class="btn btn-primary btn-block">Login</button>
-                </form>
-
-                <!-- Forgot Password -->
-                <div class="text-center mt-3">
-                    <a class="small" href="#">Forgot Password?</a>
-                </div>
-            </div>
+    <div
+      class="container-fluid d-flex justify-content-center align-items-center"
+      style="height: auto"
+    >
+      <!-- Login Card -->
+      <div class="card shadow-lg">
+        <!-- Logo (Outside the Container) -->
+        <div class="logo-container">
+          <img src="/static/resource/logo.png" alt="Logo" />
         </div>
+        <div class="card-body">
+          <!-- Form -->
+          <form method="POST" action="/login">
+            <!-- Username -->
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                name="username"
+                placeholder="Enter Username"
+                required
+              />
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                placeholder="Enter Password"
+                required
+              />
+            </div>
+
+            <!-- Login Button -->
+            <button type="submit" class="btn btn-primary btn-block">
+              Login
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
 
-
-<!-- Bootstrap JS & jQuery -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-
-</body>
+    <!-- Bootstrap JS & jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
 </html>
