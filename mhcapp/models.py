@@ -29,7 +29,7 @@ class RoleCounter(models.Model):
 
 class User(AbstractUser):
     objects = UserManager()
-    
+
     ROLES = (
         ('patient', 'Patient'),
         ('doctor', 'Doctor'),
@@ -87,3 +87,41 @@ class Doctor(models.Model):
         primary_key=True
     )
     speciality = models.CharField(max_length=100)
+
+# models proxies
+class PatientProxy(User):
+    class Meta:
+        proxy = True
+        verbose_name = 'Patient'
+        verbose_name_plural = 'Patients'
+
+class DoctorProxy(User):
+    class Meta:
+        proxy = True
+        verbose_name = 'Doctor'
+        verbose_name_plural = 'Doctors'
+
+class NurseProxy(User):
+    class Meta:
+        proxy = True
+        verbose_name = 'Nurse'
+        verbose_name_plural = 'Nurses'
+
+class LabTechProxy(User):
+    class Meta:
+        proxy = True
+        verbose_name = 'Lab Technician'
+        verbose_name_plural = 'Lab Technicians'
+
+class RadiographerProxy(User):
+    class Meta:
+        proxy = True
+        verbose_name = 'Radiographer'
+        verbose_name_plural = 'Radiographers'
+
+class AdminProxy(User):
+    class Meta:
+        proxy = True
+        verbose_name = 'Admin'
+        verbose_name_plural = 'Admins'
+

@@ -3,8 +3,9 @@ from django.contrib import admin
 from django import forms
 
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import User, Patient, Doctor, RoleCounter
+from .models import User, Patient, Doctor, RoleCounter, PatientProxy, DoctorProxy, NurseProxy, LabTechProxy, RadiographerProxy, AdminProxy
 from django.contrib.auth.forms import UserCreationForm
+
 
 class PatientInline(admin.StackedInline):
     model = Patient
@@ -83,6 +84,9 @@ class UserAdmin(BaseUserAdmin):
         }),
     )
 
+    list_filter = ('role',)  # Add role filter in sidebar
+    list_display = ('custom_id', 'name', 'phone', 'role', 'get_specialty', 'get_age')
+
     def get_readonly_fields(self, request, obj=None):
         if obj:
             return ['role', 'custom_id'] + list(super().get_readonly_fields(request, obj))
@@ -101,5 +105,118 @@ class UserAdmin(BaseUserAdmin):
 
     class Media:
         js = ('admin/js/user_role.js',)
+    
+    def get_specialty(self, obj):
+        return obj.doctor.speciality if hasattr(obj, 'doctor') else '-'
+    get_specialty.short_description = 'Specialty'
+
+    def get_age(self, obj):
+        return obj.patient.age if hasattr(obj, 'patient') else '-'
+    get_age.short_description = 'Age'
+
+# admin.py
+@admin.register(PatientProxy)
+class PatientAdmin(UserAdmin):
+    def get_queryset(self, request):
+        return super().get_queryset(request).filter(role='patient')
+    
+    def save_model(self, request, obj, form, change):
+        obj.role = 'patient'
+        super().save_model(request, obj, form, change)
+        
+    list_display = ('custom_id', 'name', 'phone', 'get_age', 'get_gender', 'get_address')
+    
+    def get_age(self, obj):
+        return obj.patient.age
+    get_age.short_description = 'Age'
+
+    def get_gender(self, obj):
+        return obj.patient.get_gender_display()
+    get_gender.short_description = 'Gender'
+
+    def get_address(self, obj):
+        return obj.patient.address
+    get_address.short_description = 'Address'
+
+@admin.register(DoctorProxy)
+class DoctorAdmin(UserAdmin):
+    def get_queryset(self, request):
+        return super().get_queryset(request).filter(role='doctor')
+    
+    def save_model(self, request, obj, form, change):
+        obj.role = 'doctor'
+        super().save_model(request, obj, form, change)
+        
+    list_display = ('custom_id', 'name', 'phone', 'get_specialty')
+    
+    def get_specialty(self, obj):
+        return obj.doctor.speciality
+    get_specialty.short_description = 'Specialty'
+
+@admin.register(NurseProxy)
+class NurseAdmin(UserAdmin):
+    def get_queryset(self, request):
+        return super().get_queryset(request).filter(role='nurse')
+    
+    def save_model(self, request, obj, form, change):
+        obj.role = 'nurse'
+        super().save_model(request, obj, form, change)
+        
+    list_display = ('custom_id', 'name', 'phone')
+
+
+@admin.register(LabTechProxy)
+class LabTechAdmin(UserAdmin):
+    def get_queryset(self, request):
+        return super().get_queryset(request).filter(role='labt')
+    
+    def save_model(self, request, obj, form, change):
+        obj.role = 'labt'
+        super().save_model(request, obj, form, change)
+        
+    list_display = ('custom_id', 'name', 'phone')
+
+@admin.register(RadiographerProxy)
+class RadiographerAdmin(UserAdmin):
+    def get_queryset(self, request):
+        return super().get_queryset(request).filter(role='rg')
+    
+    def save_model(self, request, obj, form, change):
+        obj.role = 'rg'  # Match the role value from User.ROLES
+        super().save_model(request, obj, form, change)
+        
+    list_display = ('custom_id', 'name', 'phone')  # Add any radiographer-specific fields
+    
+    # Remove fields not needed for radiographers
+    def get_form(self, request, obj=None, **kwargs):
+        form = super().get_form(request, obj, **kwargs)
+        form.base_fields.pop('speciality', None)
+        form.base_fields.pop('age', None)
+        return form
+        
+
+admin.register(AdminProxy)
+class AdminAdmin(UserAdmin):
+    def get_queryset(self, request):
+        return super().get_queryset(request).filter(role='admin')
+    
+    def save_model(self, request, obj, form, change):
+        obj.role = 'admin'
+        super().save_model(request, obj, form, change)
+        
+    list_display = ('custom_id', 'name', 'phone')
 
 admin.site.register(User, UserAdmin)
+
+# admin.py
+admin.site.unregister(User)
+
+@admin.register(User)
+class GlobalUserAdmin(UserAdmin):
+    # Original user admin configuration
+    pass
+
+# Customize admin titles
+admin.site.site_header = "MyHealthCard Administration"
+admin.site.site_title = "User Management"
+admin.site.index_title = "User Types"
