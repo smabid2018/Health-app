@@ -132,4 +132,4 @@ STATICFILES_DIRS = [
 ]
 
 # Custom User Model
-AUTH_USER_MODEL = "mhcapp.CustomUser"
+AUTH_USER_MODEL = "mhcapp.User"
