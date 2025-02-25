@@ -94,34 +94,40 @@ class PatientProxy(User):
         proxy = True
         verbose_name = 'Patient'
         verbose_name_plural = 'Patients'
+    role = 'patient'  # Add role attribute
 
 class DoctorProxy(User):
     class Meta:
         proxy = True
         verbose_name = 'Doctor'
         verbose_name_plural = 'Doctors'
+    role = 'doctor'  # Add role attribute
 
 class NurseProxy(User):
     class Meta:
         proxy = True
         verbose_name = 'Nurse'
         verbose_name_plural = 'Nurses'
+    role = 'nurse'  # Add role attribute
 
 class LabTechProxy(User):
     class Meta:
         proxy = True
         verbose_name = 'Lab Technician'
         verbose_name_plural = 'Lab Technicians'
+    role = 'labt'  # Add role attribute
 
 class RadiographerProxy(User):
     class Meta:
         proxy = True
         verbose_name = 'Radiographer'
         verbose_name_plural = 'Radiographers'
+    role = 'rg'  # Add role attribute
 
 class AdminProxy(User):
     class Meta:
         proxy = True
         verbose_name = 'Admin'
         verbose_name_plural = 'Admins'
+    role = 'admin'  # Add role attribute
 

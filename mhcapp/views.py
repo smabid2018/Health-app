@@ -8,10 +8,8 @@ def home(request):
 def drloa(request):
     return render(request, "drLOA.html")
 
-
 def loa(request):
     return render(request, "loa.html")
-
 
 def admindash(request):
     return render(request, "admindash.html")
