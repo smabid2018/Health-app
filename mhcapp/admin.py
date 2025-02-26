@@ -242,6 +242,9 @@ class AdminAdmin(UserAdmin):
 @admin.register(User)
 class GlobalUserAdmin(UserAdmin):
     # Original user admin configuration
+    # Override to ensure no filtering
+    def get_queryset(self, request):
+        return super(UserAdmin, self).get_queryset(request)
     pass
 
 # Customize admin titles
