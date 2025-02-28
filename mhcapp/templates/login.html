@@ -35,8 +35,8 @@
 
       .card {
         border: none;
-        border-radius: 20px; /* Rounded border for the container */
-        background-color: #ffffff;
+        border-radius: 200px; /* Rounded border for the container */
+        background-color: #a90606;
         width: 100%;
         max-width: 450px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better contrast */
@@ -44,7 +44,7 @@
       }
 
       .card-body {
-        background-color: #ffffff;
+        background-color: #dcdcdc;
         padding: 2rem; /* Add padding inside the card */
       }
 
@@ -97,7 +97,6 @@
             {% csrf_token %}
             <!-- Change username to phone since you're using phone as username -->
             <div class="form-group">
-              <label for="phone">Phone Number</label>
               <input
                 type="text"
                 class="form-control"
@@ -109,7 +108,6 @@
             </div>
 
             <div class="form-group">
-              <label for="password">Password</label>
               <input
                 type="password"
                 class="form-control"
