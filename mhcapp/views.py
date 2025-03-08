@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth import authenticate, login 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Patient, Doctor, AdminProxy# Add other models as needed
+from .models import Patient, Doctor, AdminProxy, NurseProxy, LabTechProxy, RadiographerProxy # Add other models as needed
 
 # Create your views here.
 
@@ -15,23 +15,16 @@ def drloa(request):
 def loa(request):
     return render(request, "loa.html")
 
-def admindash(request):
-    return render(request, "admindash.html")
+# def admindash(request):
+#     return render(request, "admindash.html")
 
-def nursedash(request):
-    return render(request, "nursedash.html")
+
 
 def vitalsentry(request):
     return render(request, "vitalsentry.html")
 
 def patientsform(request):
     return render(request, "patientsform.html")
-
-def radiographerdash(request):
-    return render(request, "radiographerdash.html")
-
-def techdash(request):
-    return render(request, "techdash.html")
 
 def radnewreq(request):
     return render(request, "radnewreq.html")
@@ -80,6 +73,36 @@ def admin_dashboard(request):
     }
     return render(request, 'admindash.html', context)
 
+@login_required
+def nursedash(request):
+    nurse = NurseProxy.objects.get(id=request.user.id)
+    context = {
+        'user': request.user,
+        'nurse': nurse,
+        'patients': Patient.objects.all()
+    }
+    return render(request, "nursedash.html", context)
+
+@login_required
+def techdash(request):
+    labtech = LabTechProxy.objects.get(id=request.user.id)
+    context = {
+        'user': request.user,
+        'labtech': labtech,
+        # 'techreqs': TechReq.objects.all()
+    }
+    return render(request, "techdash.html", context)
+
+@login_required
+def radiographerdash(request):
+    rg = RadiographerProxy.objects.get(id=request.user.id)
+    context = {
+        'user': request.user,
+        'rg': rg,
+        # 'radreqs': RadReq.objects.all()
+    }
+    return render(request, "radiographerdash.html", context)
+
 def login_view(request):
     if request.method == 'POST':
         phone = request.POST.get('phone')
@@ -104,6 +127,16 @@ def login_view(request):
             elif user.role == 'admin':
                 print(f'user detected: {user.role}, redirecting to admin_dashboard...')
                 return redirect('admin_dashboard')
+            elif user.role == 'nurse':
+                print(f'user detected: {user.role}, redirecting to nursedash...')
+                return redirect('nursedash')
+            elif user.role == 'labt':
+                print(f'user detected: {user.role}, redirecting to techdash...')
+                return redirect('techdash')
+            elif user.role == 'rg':
+                print(f'user detected: {user.role}, redirecting to radiographerdash...')
+                return redirect('radiographerdash')
+
             # Add other roles as needed
         else:
             messages.error(request, 'Invalid phone number or password')
