@@ -6,10 +6,10 @@ urlpatterns = [
     path("login/", views.login_view, name="login"),
 
     #path("", views.home, name="home"),
-    
+
     path("drloa/", views.drloa, name="drloa"),
     path("loa/", views.loa, name="drloa"),
-    path("admindash/", views.admindash, name="admindash"),
+    path("admin_dashboard/", views.admin_dashboard, name="admin_dashboard"),
     path("nursedash/", views.nursedash, name="nursedash"),
     path("vitalsentry/", views.vitalsentry, name="vitalsentry"),
     path("patientsform/", views.patientsform, name="patientsform"),

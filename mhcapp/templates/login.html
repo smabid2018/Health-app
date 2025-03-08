@@ -95,7 +95,7 @@
            <!-- Add CSRF token for security -->
            <form method="POST" action="{% url 'login' %}">
             {% csrf_token %}
-            <!-- Change username to phone since you're using phone as username -->
+            <!-- Change username to phone since we're using phone as username -->
             <div class="form-group">
               <input
                 type="text"
