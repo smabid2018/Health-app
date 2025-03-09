@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth import authenticate, login 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Patient, Doctor, AdminProxy, NurseProxy, LabTechProxy, RadiographerProxy # Add other models as needed
+from .models import Patient, Doctor, AdminProxy, NurseProxy, LabTechProxy, RadiographerProxy, User, Appointment  # Add other models as needed
 
 # Create your views here.
 
@@ -22,9 +22,6 @@ def loa(request):
 
 def vitalsentry(request):
     return render(request, "vitalsentry.html")
-
-def patientsform(request):
-    return render(request, "patientsform.html")
 
 def radnewreq(request):
     return render(request, "radnewreq.html")
@@ -72,6 +69,63 @@ def admin_dashboard(request):
         'patients': Patient.objects.all()
     }
     return render(request, 'admindash.html', context)
+
+@login_required
+def newappointment(request):
+    admin = AdminProxy.objects.get(id=request.user.id)
+    doctors = Doctor.objects.all()  # if needed for your dynamic dropdown
+    context = {
+        'admin': admin,
+        'doctors': doctors,
+    }
+
+    if request.method == "POST":
+        # Process the appointment form here.
+        # For example, get data from request.POST, validate, and save to an Appointment model (if defined)
+        patient_name = request.POST.get('patientName')
+        patient_age = request.POST.get('patientAge')
+        patient_gender = request.POST.get('patientGender')
+        patient_address = request.POST.get('patientAddress')
+        phone = request.POST.get('phone')
+        appointed_doctor_id = request.POST.get('appointedDoctor')
+        print('New appointment form submitted:')
+        print(f'patient_name: {patient_name}, patient_age: {patient_age}, patient_gender: {patient_gender}, patient_address: {patient_address}, phone: {phone}, appointed_doctor_id: {appointed_doctor_id}')
+        
+         # Create a new patient user with role 'patient'
+        # Note: In a production system, you may want to generate a random or a more secure temporary password
+        new_patient_user = User.objects.create_user(
+            phone=phone,
+            name=patient_name,
+            role='patient',
+            password='patient@123'  # Temporary password
+        )
+        
+        # Create the corresponding Patient record
+        new_patient = Patient.objects.create(
+            user=new_patient_user,
+            age=patient_age,
+            gender=patient_gender,
+            address=patient_address
+        )
+
+        # Retrieve the appointed doctor using the selected doctor ID
+        try:
+            appointed_doctor_user = User.objects.get(id=appointed_doctor_id)
+            appointed_doctor = Doctor.objects.get(user=appointed_doctor_user)
+        except (User.DoesNotExist, Doctor.DoesNotExist):
+            # Handle error appropriately. Here, we simply redirect back with an error message.
+            return redirect('admin_dashboard')
+        
+        # Create the appointment record
+        appointment = Appointment.objects.create(
+            patient=new_patient,
+            doctor=appointed_doctor,
+            status='pending'
+            # You can add chief_complain, physical_exam, etc. here if your form collects that data.
+        )
+        print(f'Appointment created with id: {appointment.appointment_id}')
+        return redirect('admin_dashboard')
+    return render(request, "newappointment.html", context)
 
 @login_required
 def nursedash(request):
