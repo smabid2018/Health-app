@@ -170,4 +170,19 @@ class RadiographerProxy(User):
         super().save(*args, **kwargs)
     role = 'rg'
 
+# Appointment models
+class Appointment(models.Model):
+    appointment_id = models.AutoField(primary_key=True)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
+    appointment_date = models.DateTimeField(auto_now_add=True)
+    chief_complain = models.TextField(blank=True, null=True)
+    physical_exam = models.TextField(blank=True, null=True)
+    ongoing_medication = models.TextField(blank=True, null=True)
+    previous_diagnosis = models.TextField(blank=True, null=True)
+    prescriptions = models.TextField(blank=True, null=True)
+    status = models.CharField(max_length=20, default='pending')
+
+    def __str__(self):
+        return f"Appointment {self.appointment_id} - {self.patient.user.name} with {self.doctor.user.name}"
 
