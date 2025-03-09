@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -29,15 +30,13 @@
         padding: 0;
         height: 100vh;
         display: flex;
-        {% comment %} justify-content: center; {% endcomment %}
-        {% comment %} align-items: center; {% endcomment %}
         flex-direction: column; /* Stack logo and container vertically */
       }
 
       .card {
         border: none;
         border-radius: 200px; /* Rounded border for the container */
-        background-color: #ffffff;
+        background-color: #a90606;
         width: 100%;
         max-width: 450px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better contrast */
@@ -45,7 +44,7 @@
       }
 
       .card-body {
-        background-color: #ffffff;
+        background-color: #dcdcdc;
         padding: 2rem; /* Add padding inside the card */
       }
 
@@ -88,27 +87,27 @@
       <div class="card shadow-lg">
         <!-- Logo (Outside the Container) -->
         <div class="logo-container">
-          <img src="/static/resource/logo.png" alt="Logo" />
+          <!-- Use Django static template tag -->
+          <img src="{% static 'resource/logo.png' %}" alt="Logo" />
         </div>
         <div class="card-body">
           <!-- Form -->
-          <form method="POST" action="/login">
-            <!-- Username -->
+           <!-- Add CSRF token for security -->
+           <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <!-- Change username to phone since we're using phone as username -->
             <div class="form-group">
-              <label for="username">Username</label>
               <input
                 type="text"
                 class="form-control"
-                id="username"
-                name="username"
-                placeholder="Enter Username"
+                id="phone"
+                name="phone"
+                placeholder="Enter Phone Number"
                 required
               />
             </div>
 
-            <!-- Password -->
             <div class="form-group">
-              <label for="password">Password</label>
               <input
                 type="password"
                 class="form-control"
@@ -119,7 +118,13 @@
               />
             </div>
 
-            <!-- Login Button -->
+            <!-- Add error messages -->
+            {% if error %}
+            <div class="alert alert-danger" role="alert">
+              {{ error }}
+            </div>
+            {% endif %}
+
             <button type="submit" class="btn btn-primary btn-block">
               Login
             </button>

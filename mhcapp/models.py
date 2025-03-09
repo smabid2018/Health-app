@@ -49,6 +49,14 @@ class User(AbstractUser):
 
     def save(self, *args, **kwargs):
         if not self.custom_id:
+            # Ensure role is set and normalized to lowercase before generating ID
+            print(f'role in the save method user class in models.py: {self.role}')
+            if not self.role:
+                self.role = 'patient'  # Default role
+            else:
+                self.role = self.role.lower()
+                print(f'role in the save method user class in models.py: {self.role}')
+                
             role_prefixes = {
                 'patient': 'PAT',
                 'doctor': 'DOC',
@@ -58,6 +66,8 @@ class User(AbstractUser):
                 'admin': 'ADM'
             }
             prefix = role_prefixes.get(self.role, 'USR')
+            
+            from django.db import transaction
             with transaction.atomic():
                 counter, created = RoleCounter.objects.select_for_update().get_or_create(role=self.role)
                 counter.count += 1
@@ -65,8 +75,6 @@ class User(AbstractUser):
                 self.custom_id = f"{prefix}{counter.count:03d}"
         super().save(*args, **kwargs)
 
-    def __str__(self):
-        return self.name
 
 # models.py
 class Patient(models.Model):
@@ -89,39 +97,77 @@ class Doctor(models.Model):
     speciality = models.CharField(max_length=100)
 
 # models proxies
+class AdminProxy(User):
+    class Meta:
+        proxy = True
+        verbose_name = 'Admin'
+        verbose_name_plural = 'Admins'
+    
+    def save(self, *args, **kwargs):
+        # Force role to be 'admin' before saving
+        if not self.role or self.role.lower() != 'admin':
+            self.role = 'admin'
+        super().save(*args, **kwargs)
+    role='admin'
+
 class PatientProxy(User):
     class Meta:
         proxy = True
         verbose_name = 'Patient'
         verbose_name_plural = 'Patients'
+    def save(self, *args, **kwargs):
+        # Force role to be 'patient' before saving
+        if not self.role or self.role.lower() != 'patient':
+            self.role = 'patient'
+        super().save(*args, **kwargs)
+    role = 'patient'  
 
 class DoctorProxy(User):
     class Meta:
         proxy = True
         verbose_name = 'Doctor'
         verbose_name_plural = 'Doctors'
+    def save(self, *args, **kwargs):
+        # Force role to be 'doctor' before saving
+        if not self.role or self.role.lower() != 'doctor':
+            self.role = 'doctor'
+        super().save(*args, **kwargs)
+    role = 'doctor'
 
 class NurseProxy(User):
     class Meta:
         proxy = True
         verbose_name = 'Nurse'
         verbose_name_plural = 'Nurses'
+    def save(self, *args, **kwargs):
+        # Force role to be 'nurse' before saving
+        if not self.role or self.role.lower() != 'nurse':
+            self.role = 'nurse'
+        super().save(*args, **kwargs)
+    role = 'nurse'
 
 class LabTechProxy(User):
     class Meta:
         proxy = True
         verbose_name = 'Lab Technician'
         verbose_name_plural = 'Lab Technicians'
+    def save(self, *args, **kwargs):
+        # Force role to be 'labt' before saving
+        if not self.role or self.role.lower() != 'labt':
+            self.role = 'labt'
+        super().save(*args, **kwargs)
+    role = 'labt'
 
 class RadiographerProxy(User):
     class Meta:
         proxy = True
         verbose_name = 'Radiographer'
         verbose_name_plural = 'Radiographers'
+    def save(self, *args, **kwargs):
+        # Force role to be 'rg' before saving
+        if not self.role or self.role.lower() != 'rg':
+            self.role = 'rg'
+        super().save(*args, **kwargs)
+    role = 'rg'
 
-class AdminProxy(User):
-    class Meta:
-        proxy = True
-        verbose_name = 'Admin'
-        verbose_name_plural = 'Admins'
 
