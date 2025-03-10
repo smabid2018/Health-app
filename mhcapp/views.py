@@ -62,9 +62,13 @@ def doctor_dashboard(request):
 @login_required
 def admin_dashboard(request):
     admin = AdminProxy.objects.get(id=request.user.id)
+    admin = AdminProxy.objects.get(id=request.user.id)
+    appointments = Appointment.objects.all().order_by('-appointment_date')
+    
     context = {
         'user': request.user,
         'admin': admin,
+        'appointments': appointments,
         'doctors': Doctor.objects.all(),
         'patients': Patient.objects.all()
     }
